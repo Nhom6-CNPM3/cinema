@@ -39,7 +39,7 @@ Cấu hình thông tin database tại file .env
 ![Giao diện đăng nhập](./public/hinhanhGiaodien/Client/Login.png)
 <h4 align="center">Đăng nhập</h4>
 
-![Giao diện trang chủ](./public/hinhanhGiaodien/Client/Home.png)
+![Giao diện trang chủ](./public/hinhanhGiaodien/Client/home.png)
 <h4 align="center">Trang Chủ</h4>
 
 ![Giao diện danh sách phim](./public/hinhanhGiaodien/Client/movie.png)
