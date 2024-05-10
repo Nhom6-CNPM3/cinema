@@ -2,9 +2,6 @@
 # Đồ án Phát triển phần mềm mã nguồn mở
 Đề tài : Phần mềm Đặt vé xem phim online
 
-### Hướng dẫn cài đặt
-
-Cấu hình thông tin database tại file .env
 
 ### Chức năng
 1. Đăng ký thành viên
@@ -24,23 +21,11 @@ Cấu hình thông tin database tại file .env
 13. Quản lý ghế ngồi
 14. Quản lý combo đồ ăn thức uống
 
-### Tài khoản Admin
-
-- Username: admin@gmail.com
-- Password: 123
-
 
 ### Giao diện người dùng
 
 ![Giao diện đăng ký](./public/hinhanhGiaodien/Client/Register.png)
 <h4 align="center">Đăng Ký</h4>
-
-
-
-
-
-
-
 
 ![Giao diện đăng nhập](./public/hinhanhGiaodien/Client/Login.png)
 <h4 align="center">Đăng nhập</h4>
