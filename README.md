@@ -7,10 +7,8 @@
 1. Đăng ký thành viên
 2. Xem thông tin chi tiết phim
 3. Xem tin tức
-*Người dùng đã đăng ký
 4. Đăng nhập thành viên
 5. Đặt vé
-*Admin
 6. Đăng nhập admin
 7. Quản lý thành viên
 8. Quản lý phim
