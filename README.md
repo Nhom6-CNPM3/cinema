@@ -33,8 +33,14 @@ Cấu hình thông tin database tại file .env
 ### Giao diện người dùng
 
 ![Giao diện đăng ký](./public/hinhanhGiaodien/Client/Register.png)
-
 <h4 align="center">Đăng Ký</h4>
+
+
+
+
+
+
+
 
 ![Giao diện đăng nhập](./public/hinhanhGiaodien/Client/Login.png)
 <h4 align="center">Đăng nhập</h4>
