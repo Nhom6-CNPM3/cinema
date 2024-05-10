@@ -7,8 +7,22 @@
 Cấu hình thông tin database tại file .env
 
 ### Chức năng
-1.
-
+1. Đăng ký thành viên
+2. Xem thông tin chi tiết phim
+3. Xem tin tức
+*Người dùng đã đăng ký
+4. Đăng nhập thành viên
+5. Đặt vé
+*Admin
+6. Đăng nhập admin
+7. Quản lý thành viên
+8. Quản lý phim
+9. Quản lý rạp 
+10. Quản lý vé
+11. Quản lý lịch chiếu
+12. Quản lý phòng chiếu
+13. Quản lý ghế ngồi
+14. Quản lý combo đồ ăn thức uống
 
 ### Tài khoản Admin
 
@@ -16,13 +30,58 @@ Cấu hình thông tin database tại file .env
 - Password: 123
 
 
-### Giao diện
+### Giao diện người dùng
 
+![Giao diện đăng ký](./hinhanhGiaodien/Client/Register.png)
 
+<h4 align="center">Đăng Ký</h4>
 
-![Giao diện đăng nhập](./img/login.jpeg)
-
+![Giao diện đăng nhập](./hinhanhGiaodien/Client/Login.png)
 <h4 align="center">Đăng nhập</h4>
+
+![Giao diện trang chủ](./hinhanhGiaodien/Client/Home.png)
+<h4 align="center">Trang Chủ</h4>
+
+![Giao diện danh sách phim](./hinhanhGiaodien/Client/movie.png)
+<h4 align="center">Danh sách phim</h4>
+
+![Giao diện thông tin chi tiết phim](./hinhanhGiaodien/Client/movieDetails.png)
+<h4 align="center">Thông tin chi tiết phim</h4>
+
+![Giao diện đặt vé](./hinhanhGiaodien/Client/datve.png)
+<h4 align="center">Đặt vé</h4>
+
+![Giao diện tin tức](./hinhanhGiaodien/Client/tintuc.png)
+<h4 align="center">Tin tức</h4>
+
+### Giao diện quản trị
+
+![Giao diện quản lý người dùng](./hinhanhGiaodien/Admin/QLUser.png)
+<h4 align="center">Quản lý người dùng</h4>
+
+![Giao diện quản lý phim](./hinhanhGiaodien/Admin/QLPhim.png)
+<h4 align="center">Quản lý phim</h4>
+
+![Giao diện quản lý rạp](./hinhanhGiaodien/Admin/QLRap.png)
+<h4 align="center">Quản lý rạp</h4>
+
+![Giao diện quản lý phòng](./hinhanhGiaodien/Admin/QLPhong.png)
+<h4 align="center">Quản lý phòng</h4>
+
+![Giao diện quản lý ghế ngồi](./hinhanhGiaodien/Admin/QLGhe.png)
+<h4 align="center">Quản lý ghế ngồi</h4>
+
+![Giao diện quản lý lịch chiếu](./hinhanhGiaodien/Admin/QLLichChieu.png)
+<h4 align="center">Quản lý lịch chiếu</h4>
+
+![Giao diện quản lý đồ ăn thức uống](./hinhanhGiaodien/Admin/QLCombo.png)
+<h4 align="center">Quản lý đồ ăn thức uống</h4>
+
+![Giao diện quản lý tin tức](./hinhanhGiaodien/Admin/QLTinTuc.png)
+<h4 align="center">Quản lý tin tức</h4>
+
+
+
 
 
 
