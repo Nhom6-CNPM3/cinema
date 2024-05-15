@@ -41,13 +41,14 @@ Route::post('/buy-ticket', [HomeController::class, 'showBuyTicket'])->name('buy.
 
 Route::get('/user-tickets', [HomeController::class, 'showUserTickets'])->name('user.tickets')->middleware([ 'auth']);
 Route::get('/payment', [HomeController::class, 'payment'])->name('payment')->middleware([ 'auth']);
+Route::get('/checkpayment', [HomeController::class, 'checkpayment'])->name('checkpayment')->middleware([ 'auth']);
 
 
 Route::name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // CRUD users
 
-    Route::resource('/dashboard/users', UserController::class)->names([
+    Route::resource('users', UserController::class)->names([
         'index' => 'users.index',
         'create' => 'users.create',
         'store' => 'users.store',
@@ -56,6 +57,7 @@ Route::name('admin.')->group(function () {
         'update' => 'users.update',
         'destroy' => 'users.destroy',
     ]);
+
 
     // CRUD movies
     Route::resource('/dashboard/movies', MovieController::class);

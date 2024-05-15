@@ -33,7 +33,7 @@
                                         <p class="font-size-15 mb-0 text-white"><strong>Khung giờ chiếu:</strong> {{ $ticket->gio }}</p>
                                         <p class="font-size-15 mb-0 text-white"><strong>Ngày chiếu:</strong> {{ $ticket->ngay }}</p>
                                         <p class="font-size-15 mb-0 text-white"><strong>Tên món ăn:</strong> {{ $ticket->tencombo }}</p>
-                                        <p class="font-size-15 mb-0 text-white"><strong>Giá vé:</strong> {{ number_format($ticket->gia, 0, ',', '.') }} VND</p>
+                                        <p class="font-size-15 mb-0 text-white"><strong>Giá vé:</strong> {{ number_format($ticket->giave + $ticket->giacombo , 0, ',', '.') }} VND</p>
 
                                     </div>
 

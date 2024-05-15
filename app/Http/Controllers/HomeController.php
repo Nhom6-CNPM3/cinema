@@ -128,11 +128,12 @@ public function logout()
 
     public function showBuyTicket()
     {
+
         // Lấy thông tin từ request
         $selectedScheduleId = request('selectedScheduleId');
         $selectedRoomId = request('selectedRoomId');
         $selectedSeatId = request('selectedSeatId');
-        $selectedComboFoodId = request('comboFood');
+        $selectedComboFoodId = request('comboFood1');
 
         // Lấy ID của người dùng hiện tại
         $userId = Auth::user()->id_user;
@@ -163,13 +164,13 @@ public function logout()
     ->leftJoin('tbcombo', 'tbve.id_combo', '=', 'tbcombo.id_combo')
     ->where('tbve.id_user', $userId)
     ->where('tbve.payments', 'pending') // Chỉ lấy vé chưa thanh toán
-    ->select('tbve.*', 'tbphim.atenphim', 'tbphim.hinhanh', 'tbrap.tenrap', 'tbphong.tenphong', 'tblichchieu.ngay', 'tblichchieu.gio', 'tbghe.soghe', 'tbcombo.tencombo', 'tbcombo.gia');
+    ->select('tbve.*', 'tbphim.atenphim', 'tbphim.hinhanh', 'tbphim.giave',  'tbrap.tenrap', 'tbphong.tenphong', 'tblichchieu.ngay', 'tblichchieu.gio', 'tbghe.soghe', 'tbcombo.tencombo', 'tbcombo.gia as giacombo');
 
-// Lấy danh sách các vé
-$userTickets = $userTicketsQuery->get();
+    // Lấy danh sách các vé
+    $userTickets = $userTicketsQuery->get();
 // Tính tổng tiền của các vé chưa thanh toán
 $totalPendingPayments = $userTickets->sum(function ($ticket) {
-return $ticket->gia; // Giả sử giá của vé được lấy từ trường 'gia'
+return $ticket->giave +$ticket->giacombo ; // Giả sử giá của vé được lấy từ trường 'gia'
 });
 
 
@@ -178,24 +179,122 @@ return $ticket->gia; // Giả sử giá của vé được lấy từ trường 
         return view('frontend.ticket', compact('userTickets', 'totalPendingPayments'));
     }
 
-    public function payment()
+    public function checkpayment()
     {
-        // Lấy ID của người dùng hiện tại
-        $userId = Auth::user()->id_user;
 
-        // Lấy danh sách các vé của người dùng đang đăng nhập từ cơ sở dữ liệu
-        $userTickets = Ticket::where('id_user', $userId)
-            ->where('payments', 'pending')
-            ->get();
+        if(request()->vnp_ResponseCode == "00") {
+ // Lấy ID của người dùng hiện tại
+ $userId = Auth::user()->id_user;
 
-        // Cập nhật trạng thái thanh toán của các vé thành 'paid'
-        foreach ($userTickets as $ticket) {
-            $ticket->payments = 'paid';
-            $ticket->save();
+ // Lấy danh sách các vé của người dùng đang đăng nhập từ cơ sở dữ liệu
+ $userTickets = Ticket::where('id_user', $userId)
+     ->where('payments', 'pending')
+     ->get();
+
+ // Cập nhật trạng thái thanh toán của các vé thành 'paid'
+ foreach ($userTickets as $ticket) {
+     $ticket->payments = 'paid';
+     $ticket->save();
+ }
+
         }
 
         // Chuyển hướng người dùng về trang nào đó sau khi thanh toán thành công
         return redirect()->route('home')->with('success', 'Thanh toán thành công.');
+    }
+    public function payment()
+    {
+
+          // Lấy ID của người dùng hiện tại
+          $userId = Auth::user()->id_user;
+
+          // Lấy danh sách các vé của người dùng từ cơ sở dữ liệu và phân trang
+         // Truy vấn lấy danh sách các vé của người dùng có trạng thái thanh toán là "pending"
+      $userTicketsQuery = Ticket::join('tblichchieu', 'tbve.id_lichchieu', '=', 'tblichchieu.id_lichchieu')
+      ->join('tbphim', 'tblichchieu.id_phim', '=', 'tbphim.id_phim')
+      ->join('tbrap', 'tblichchieu.id_rap', '=', 'tbrap.id_rap')
+      ->join('tbghe', 'tbve.id_ghe', '=', 'tbghe.id_ghe')
+      ->join('tbphong', 'tblichchieu.id_phong', '=', 'tbphong.id_phong')
+      ->leftJoin('tbcombo', 'tbve.id_combo', '=', 'tbcombo.id_combo')
+      ->where('tbve.id_user', $userId)
+      ->where('tbve.payments', 'pending') // Chỉ lấy vé chưa thanh toán
+      ->select('tbve.*', 'tbphim.atenphim', 'tbphim.hinhanh', 'tbrap.tenrap', 'tbphong.tenphong', 'tblichchieu.ngay', 'tblichchieu.gio', 'tbghe.soghe', 'tbcombo.tencombo', 'tbcombo.gia');
+
+  // Lấy danh sách các vé
+  $userTickets = $userTicketsQuery->get();
+  // Tính tổng tiền của các vé chưa thanh toán
+  $totalPendingPayments = $userTickets->sum(function ($ticket) {
+  return $ticket->gia; // Giả sử giá của vé được lấy từ trường 'gia'
+  });
+
+
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = "http://127.0.0.1:8000/checkpayment";
+        $vnp_TmnCode = "R3E63P5P"; //Mã website tại VNPAY
+        $vnp_HashSecret = "GXDEHIEBSREFTEALNKYBXMKDKVVBEJPC"; //Chuỗi bí mật
+
+        $vnp_TxnRef = rand(10000, 200000); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = 'Thanh Toán đơn hàng tại Electro';
+        $vnp_OrderType = 'bank';
+        $vnp_Amount = round((  $totalPendingPayments  ) * 100 ) ;
+        $vnp_Locale = 'vn';
+        $vnp_BankCode = 'NCB';
+        $vnp_IpAddr = 'http://127.0.0.1:8000/checkpayment';
+      
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef,
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        }
+
+        //var_dump($inputData);
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $returnData = array(
+            'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+        );
+        if (true) {
+            // after payment is completed
+
+            header('Location: ' . $vnp_Url);
+            die();
+        } else {
+            echo json_encode($returnData);
+        }
+
     }
 
 }
