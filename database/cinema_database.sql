@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 15, 2024 lúc 10:55 AM
+-- Thời gian đã tạo: Th5 15, 2024 lúc 12:38 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -149,7 +149,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('0Xakl8AoRW8EyAY3sKcSIOg4hw2sGwiZNJUo9Jpj', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS053V3ZaVW1FWml0QlFXWFo4cUkwOW1JUFU4ODIzaEZIRnBLUUd0biI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1715701412);
+('0Xakl8AoRW8EyAY3sKcSIOg4hw2sGwiZNJUo9Jpj', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS053V3ZaVW1FWml0QlFXWFo4cUkwOW1JUFU4ODIzaEZIRnBLUUd0biI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1715701412),
+('ahXLN86P9foNFitnWydDvVmeofeZ9CmZJ7EVo651', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZkpJMHBKR2RsMXZMcXdETlAxNHRsemg5SXJzMWxMdVkxRVlCcjJPbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyLXRpY2tldHMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1715767310),
+('fsB9ZNbxkWtXRWX6evXd5nLyZ0Qy938Z7tf4y91k', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVEdOV1ZsdnV4SWdrTG9UbkNDblVsZjdJNDNzUnQ1dUNDYmZVYTFqZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyLXRpY2tldHMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1715769489);
 
 -- --------------------------------------------------------
 
@@ -485,11 +487,8 @@ CREATE TABLE `tbve` (
 --
 
 INSERT INTO `tbve` (`id_ve`, `id_lichchieu`, `id_user`, `id_ghe`, `id_combo`, `payments`) VALUES
-(1, 10, 1, 1, 1, 'paid'),
-(2, 28, 1, 19, 1, 'paid'),
-(18, 10, 1, 1, 3, 'paid'),
-(19, 10, 1, 16, 1, 'paid'),
-(20, 10, 1, 1, NULL, 'paid');
+(27, 10, 1, 15, 1, 'pending'),
+(29, 10, 1, 1, NULL, 'pending');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -684,7 +683,7 @@ ALTER TABLE `tbusers`
 -- AUTO_INCREMENT cho bảng `tbve`
 --
 ALTER TABLE `tbve`
-  MODIFY `id_ve` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_ve` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
